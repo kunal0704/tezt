@@ -1,51 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Visitor Info Tracker</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-900 text-white font-mono p-6">
-  <div class="max-w-xl mx-auto">
-    <h1 class="text-3xl font-bold mb-4">🔍 Visitor Information</h1>
-    <div id="ipinfo" class="mb-6"></div>
-    <div id="deviceinfo" class="mb-6"></div>
-    <footer class="mt-12 text-sm text-gray-400">
-      Made with ❤️ by Rohit Deore. | IP-based detection only.
-    </footer>
-  </div>
-
-  <script>
-    // Get IP and location info
-    fetch('https://ipapi.co/json/')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('ipinfo').innerHTML = `
-          <p>📍 <strong>Location:</strong> ${data.city}, ${data.region}, ${data.country_name}</p>
-          <p>🌐 <strong>IP Address:</strong> ${data.ip}</p>
-          <p>📡 <strong>ISP:</strong> ${data.org}</p>
-        `;
-      });
-
-    // Device info
-    const nav = navigator;
-    const deviceData = {
-      browser: nav.userAgent,
-      platform: nav.platform,
-      cores: nav.hardwareConcurrency || 'Unknown',
-      memory: nav.deviceMemory ? nav.deviceMemory + " GB" : 'Unknown',
-      connection: nav.connection?.type || 'Unknown',
-      downlink: nav.connection?.downlink + ' Mbps' || 'Unknown'
-    };
-
-    document.getElementById('deviceinfo').innerHTML = `
-      <p>💻 <strong>Browser:</strong> ${deviceData.browser}</p>
-      <p>🧠 <strong>CPU Cores:</strong> ${deviceData.cores}</p>
-      <p>📦 <strong>Memory:</strong> ${deviceData.memory}</p>
-      <p>🔌 <strong>Connection Type:</strong> ${deviceData.connection}</p>
-      <p>⚡ <strong>Speed:</strong> ${deviceData.downlink}</p>
-    `;
-  </script>
-</body>
-</html>
+<div class="visitor-info">
+  <h3>🔍 Visitor Information</h3>
+  <p>📍 <strong>Location:</strong> Madgaon, Goa, India</p>
+  <p>🌐 <strong>IP Address:</strong> 103.119.208.122</p>
+  <p>📡 <strong>ISP:</strong> Alegra Communication Private Limited</p>
+  <br>
+  <p>🧭 <strong>Browser:</strong> Chrome 138</p>
+  <p>💡 <strong>Engine:</strong> Blink (WebKit 537.36)</p>
+  <p>🪟 <strong>OS:</strong> Windows 10 (64-bit)</p>
+  <p>🧠 <strong>CPU Cores:</strong> 4</p>
+</div>
