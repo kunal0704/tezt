@@ -1,11 +1,67 @@
-<div class="visitor-info">
-  <h3>🔍 Visitor Information</h3>
-  <p>📍 <strong>Location:</strong> Madgaon, Goa, India</p>
-  <p>🌐 <strong>IP Address:</strong> 103.119.208.122</p>
-  <p>📡 <strong>ISP:</strong> Alegra Communication Private Limited</p>
-  <br>
-  <p>🧭 <strong>Browser:</strong> Chrome 138</p>
-  <p>💡 <strong>Engine:</strong> Blink (WebKit 537.36)</p>
-  <p>🪟 <strong>OS:</strong> Windows 10 (64-bit)</p>
-  <p>🧠 <strong>CPU Cores:</strong> 4</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Visitor Info</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #0f0f0f;
+      color: #00ffff;
+      font-family: monospace;
+      padding: 2rem;
+    }
+    #visitor-info {
+      background: #1a1a1a;
+      border: 1px solid #00ffff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      line-height: 1.8em;
+      max-width: 600px;
+    }
+    strong {
+      color: #00ff88;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="visitor-info">
+    🔍 <strong>Visitor Information</strong><br>
+    📍 Location: Madgaon, Goa, India<br>
+    🌐 IP Address: 103.119.208.122<br>
+    📡 ISP: Alegra Communication Private Limited<br>
+    🧭 Browser: <span id="browser">Detecting...</span><br>
+    💡 Engine: <span id="engine">Detecting...</span><br>
+    🪟 OS: <span id="os">Detecting...</span><br>
+    🧠 CPU Cores: <span id="cores">Detecting...</span><br>
+  </div>
+
+  <script>
+    const ua = navigator.userAgent;
+
+    // Detect browser
+    const browserMatch = ua.match(/(Chrome|Firefox|Safari|Edge|Opera|Brave)\/([\d.]+)/i);
+    const browser = browserMatch ? `${browserMatch[1]} ${browserMatch[2]}` : "Unknown";
+
+    // Detect engine
+    const engine = ua.includes("AppleWebKit") ? "Blink (WebKit 537.36)" :
+                   ua.includes("Gecko") ? "Gecko" :
+                   "Unknown";
+
+    // Detect OS
+    const osMatch = ua.match(/\(([^)]+)\)/);
+    const os = osMatch ? osMatch[1] : "Unknown";
+
+    // CPU cores
+    const cores = navigator.hardwareConcurrency || "Unknown";
+
+    // Display values
+    document.getElementById("browser").textContent = browser;
+    document.getElementById("engine").textContent = engine;
+    document.getElementById("os").textContent = os;
+    document.getElementById("cores").textContent = cores;
+  </script>
+
+</body>
+</html>
