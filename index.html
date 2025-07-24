@@ -3,33 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rohit Deore | Cybersecurity Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
+  <title>Visitor Info Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <header>
-    <h1 id="greeting">🕵️‍♂️ Tracing your location...</h1>
-    <p id="ip-details"></p>
-    <p id="device-info"></p>
-  </header>
+<body class="bg-gray-900 text-white font-mono p-6">
+  <div class="max-w-xl mx-auto">
+    <h1 class="text-3xl font-bold mb-4">🔍 Visitor Information</h1>
+    <div id="ipinfo" class="mb-6"></div>
+    <div id="deviceinfo" class="mb-6"></div>
+    <footer class="mt-12 text-sm text-gray-400">
+      Made with ❤️ by Rohit Deore. | IP-based detection only.
+    </footer>
+  </div>
 
-  <main>
-    <section>
-      <h2>About Me</h2>
-      <p>I’m Rohit Deore, a passionate cybersecurity learner, designer, and automation scripter.</p>
-    </section>
+  <script>
+    // Get IP and location info
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('ipinfo').innerHTML = `
+          <p>📍 <strong>Location:</strong> ${data.city}, ${data.region}, ${data.country_name}</p>
+          <p>🌐 <strong>IP Address:</strong> ${data.ip}</p>
+          <p>📡 <strong>ISP:</strong> ${data.org}</p>
+        `;
+      });
 
-    <section>
-      <h2>Contact</h2>
-      <a href="mailto:your.email@example.com" class="mail">📧 Gmail Me</a>
-      <a href="https://github.com/yourgithub" target="_blank">💻 GitHub</a>
-      <a href="https://www.linkedin.com/in/yourlinkedin" target="_blank">🔗 LinkedIn</a>
-    </section>
-  </main>
+    // Device info
+    const nav = navigator;
+    const deviceData = {
+      browser: nav.userAgent,
+      platform: nav.platform,
+      cores: nav.hardwareConcurrency || 'Unknown',
+      memory: nav.deviceMemory ? nav.deviceMemory + " GB" : 'Unknown',
+      connection: nav.connection?.type || 'Unknown',
+      downlink: nav.connection?.downlink + ' Mbps' || 'Unknown'
+    };
 
-  <footer>
-    <p>© 2025 Rohit Deore. All rights reserved. Crafted with ❤️ for security.</p>
-  </footer>
+    document.getElementById('deviceinfo').innerHTML = `
+      <p>💻 <strong>Browser:</strong> ${deviceData.browser}</p>
+      <p>🧠 <strong>CPU Cores:</strong> ${deviceData.cores}</p>
+      <p>📦 <strong>Memory:</strong> ${deviceData.memory}</p>
+      <p>🔌 <strong>Connection Type:</strong> ${deviceData.connection}</p>
+      <p>⚡ <strong>Speed:</strong> ${deviceData.downlink}</p>
+    `;
+  </script>
 </body>
 </html>
